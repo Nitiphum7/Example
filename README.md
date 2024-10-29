@@ -1,97 +1,27 @@
-| Supported Targets | ESP32 | ESP32-C2 | ESP32-C3 | ESP32-C6 | ESP32-S2 | ESP32-S3 |
-| ----------------- | ----- | -------- | -------- | -------- | -------- | -------- |
+# Example นี้มีชื่อว่า captive_portal
+โดยการทำงานของ Example นี้คือทำให้ esp32 เป็น Captive Portal และเป็น Access Point โดยจะหน้าเข้าสู่ระบบกับอุปกรณ์ที่มาเชื่อมต่อ
+#
+ขั้นตอนแรกเลือก Example
+![Screenshot 2024-10-29 224113](https://github.com/user-attachments/assets/1fce76d3-c867-4325-bb3c-57b8b09aae6e)
 
-# Captive Portal Example
+builเเละrunโปรแกรม
+![Screenshot 2024-10-29 225321](https://github.com/user-attachments/assets/1367656a-0275-4e74-ab36-82c4ed151994)
 
-(See the README.md file in the upper level 'examples' directory for more information about examples.)
 
-This example demonstrates a simple captive portal that will redirect all DNS IP questions to point to the softAP and redirect all HTTP requests to the captive portal root page. Triggers captive portal (sign in) pop up on Android, iOS and Windows. Note that the example will not redirect HTTPS requests.
+เลือกเชื่อมกับ esp32_ssid
 
-## How to Use Example
+![S__39419909_0](https://github.com/user-attachments/assets/53ac02a9-e397-4f9f-a311-d34dc527df4b)
 
-Before project configuration and build, be sure to set the correct chip target using `idf.py set-target <chip_name>`.
 
-### Hardware Required
+![S__39419907_0](https://github.com/user-attachments/assets/7d800ce5-8a82-4042-ab05-2fc1eea93c6b)
 
-* A development board with ESP32/ESP32-S2/ESP32-C3 SoC (e.g., ESP32-DevKitC, ESP-WROVER-KIT, etc.)
-* A USB cable for power supply and programming
-* WiFi interface
+จะขึ้นหน้า root.html เมื่อนำอุปกรณ์เชื่อมต่อเข้าไปที่เครือข่าย
 
-### Configure the project
+![Screenshot 2024-10-29 225233](https://github.com/user-attachments/assets/9cdd6df5-428c-4de2-a674-68d9406de975)
 
-Open the project configuration menu (`idf.py menuconfig`).
 
-In the `Example Configuration` menu:
+# เพิ่มเติม
+สามารถแก้ไขชื่อและรหัส Access Point โดยการกด menuconfig
 
-* Set the Wi-Fi configuration.
-    * Set `SoftAP SSID`
-    * Set `SoftAP Password`
-    * Set `Maximal STA connections`
+![Screenshot 2024-10-29 225522](https://github.com/user-attachments/assets/c5657a80-d4d5-4fb2-bbde-7e698a4ed663)
 
-### Build and Flash
-
-Build the project and flash it to the board, then run monitor tool to view serial output:
-
-```
-idf.py -p PORT flash monitor
-```
-
-(To exit the serial monitor, type ``Ctrl-]``.)
-
-See the Getting Started Guide for full steps to configure and use ESP-IDF to build projects.
-
-## Example Output
-
-```
-I (733) example: Set up softAP with IP: 192.168.4.1
-I (743) example: wifi_init_softap finished. SSID:'esp32_ssid' password:'esp32_pwd'
-I (753) example: Starting server on port: '80'
-I (753) example: Registering URI handlers
-I (763) example_dns_redirect_server: Socket created
-I (763) example_dns_redirect_server: Socket bound, port 53
-I (773) example_dns_redirect_server: Waiting for data
-I (1873) wifi:new:<1,1>, old:<1,1>, ap:<1,1>, sta:<255,255>, prof:1
-I (1873) wifi:station: e8:84:a5:18:8f:80 join, AID=1, bgn, 40U
-I (2203) example: station e8:84:a5:18:8f:80 join, AID=1
-I (2833) example_dns_redirect_server: Received 50 bytes from 192.168.4.2 | DNS reply with len: 66
-I (2843) example_dns_redirect_server: Waiting for data
-I (3043) example_dns_redirect_server: Received 39 bytes from 192.168.4.2 | DNS reply with len: 55
-I (3043) example_dns_redirect_server: Waiting for data
-I (3043) example_dns_redirect_server: Received 42 bytes from 192.168.4.2 | DNS reply with len: 58
-I (3053) example_dns_redirect_server: Waiting for data
-W (3203) wifi:<ba-add>idx:4 (ifx:1, e8:84:a5:18:8f:80), tid:0, ssn:9, winSize:64
-I (3533) example: Redirecting to root
-I (5693) example_dns_redirect_server: Received 37 bytes from 192.168.4.2 | DNS reply with len: 53
-I (5693) example_dns_redirect_server: Waiting for data
-I (5783) example_dns_redirect_server: Received 46 bytes from 192.168.4.2 | DNS reply with len: 62
-I (5783) example_dns_redirect_server: Waiting for data
-I (6303) example_dns_redirect_server: Received 41 bytes from 192.168.4.2 | DNS reply with len: 57
-I (6303) example_dns_redirect_server: Waiting for data
-I (6303) example_dns_redirect_server: Received 41 bytes from 192.168.4.2 | DNS reply with len: 57
-I (6313) example_dns_redirect_server: Waiting for data
-I (6593) example: Redirecting to root
-I (9623) example: Redirecting to root
-I (12913) example: Redirecting to root
-I (13263) example_dns_redirect_server: Received 34 bytes from 192.168.4.2 | DNS reply with len: 50
-I (13273) example_dns_redirect_server: Waiting for data
-I (13273) example_dns_redirect_server: Received 34 bytes from 192.168.4.2 | DNS reply with len: 50
-I (13283) example_dns_redirect_server: Waiting for data
-I (16303) example_dns_redirect_server: Received 32 bytes from 192.168.4.2 | DNS reply with len: 48
-I (16303) example_dns_redirect_server: Waiting for data
-I (18073) example: Redirecting to root
-I (18273) example_dns_redirect_server: Received 34 bytes from 192.168.4.2 | DNS reply with len: 50
-I (18273) example_dns_redirect_server: Waiting for data
-I (18273) example_dns_redirect_server: Received 34 bytes from 192.168.4.2 | DNS reply with len: 50
-I (18283) example_dns_redirect_server: Waiting for data
-I (20683) example_dns_redirect_server: Received 42 bytes from 192.168.4.2 | DNS reply with len: 58
-I (20683) example_dns_redirect_server: Waiting for data
-I (20753) example: Redirecting to root
-I (21323) example: Redirecting to root
-I (22683) example_dns_redirect_server: Received 48 bytes from 192.168.4.2 | DNS reply with len: 64
-I (22693) example_dns_redirect_server: Waiting for data
-I (23443) example_dns_redirect_server: Received 48 bytes from 192.168.4.2 | DNS reply with len: 64
-I (23453) example_dns_redirect_server: Waiting for data
-I (23473) example: Serve root
-I (23503) example_dns_redirect_server: Received 48 bytes from 192.168.4.2 | DNS reply with len: 64
-I (23513) example_dns_redirect_server: Waiting for data
-```
